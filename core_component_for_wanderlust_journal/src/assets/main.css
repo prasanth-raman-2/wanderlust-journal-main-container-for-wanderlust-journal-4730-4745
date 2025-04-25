@@ -1,0 +1,48 @@
+@import './base.css';
+
+/* Global Styles */
+:root {
+  color-scheme: dark;
+}
+
+html {
+  overflow-y: auto !important;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Container Styles */
+.v-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* Typography */
+.v-application {
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+/* Transitions */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+  .v-container {
+    padding: 0.5rem;
+  }
+}
