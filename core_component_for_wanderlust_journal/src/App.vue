@@ -1,11 +1,23 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { RouterView } from 'vue-router'
+import { RouterView, useRouter } from 'vue-router'
 
+const router = useRouter()
 const drawer = ref(false)
+const isLoading = ref(false)
+
+// Handle route loading states
+router.beforeEach(() => {
+  isLoading.value = true
+})
+
+router.afterEach(() => {
+  isLoading.value = false
+})
 const navigationItems = [
   { title: 'Home', icon: 'mdi-home', route: '/' },
   { title: 'My Entries', icon: 'mdi-notebook', route: '/entries' },
+  { title: 'Timeline', icon: 'mdi-timeline-clock', route: '/timeline' },
   { title: 'Travel Map', icon: 'mdi-map', route: '/map' },
   { title: 'Photo Gallery', icon: 'mdi-image', route: '/gallery' },
   { title: 'Settings', icon: 'mdi-cog', route: '/settings' }
@@ -36,7 +48,27 @@ const navigationItems = [
     <!-- Main Content -->
     <v-main>
       <v-container fluid>
-        <RouterView />
+        <!-- Loading overlay -->
+        <v-overlay
+          v-model="isLoading"
+          class="align-center justify-center"
+        >
+          <v-progress-circular
+            size="64"
+            color="primary"
+            indeterminate
+          />
+        </v-overlay>
+
+        <!-- Route content with transition -->
+        <RouterView v-slot="{ Component }">
+          <transition
+            name="fade"
+            mode="out-in"
+          >
+            <component :is="Component" />
+          </transition>
+        </RouterView>
       </v-container>
     </v-main>
   </v-app>

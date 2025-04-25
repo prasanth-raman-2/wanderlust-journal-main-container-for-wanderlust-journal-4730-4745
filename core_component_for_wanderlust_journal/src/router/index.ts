@@ -15,6 +15,11 @@ const router = createRouter({
       component: () => import('../views/EntriesView.vue')
     },
     {
+      path: '/timeline',
+      name: 'timeline',
+      component: () => import('../views/TimelineView.vue')
+    },
+    {
       path: '/map',
       name: 'map',
       component: () => import('../views/MapView.vue')
@@ -28,6 +33,12 @@ const router = createRouter({
       path: '/settings',
       name: 'settings',
       component: () => import('../views/SettingsView.vue')
+    },
+    // Catch all 404 - must be last
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: () => import('../views/NotFound.vue')
     }
   ]
 })
